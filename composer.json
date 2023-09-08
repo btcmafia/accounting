@@ -1,5 +1,5 @@
 {
-    "name": "scottlaurent/accounting",
+    "name": "btcmafia/accounting",
     "description": "Laravel Accounting Journals for Eloquent Models",
     "license": "MIT",
     "keywords": ["laravel", "accounting"],

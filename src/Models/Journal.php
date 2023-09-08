@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Money\Money;
 use Money\Currency;
 use Carbon\Carbon;
@@ -21,10 +22,25 @@ use Carbon\Carbon;
  */
 class Journal extends Model
 {
+
+    use HasUuids;
+
     /**
      * @var string
      */
     protected $table = 'accounting_journals';
+
+    /**
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * @var string
+     */
+    protected $keyType = 'uuid';
+
+
 
     public function morphed(): MorphTo
     {

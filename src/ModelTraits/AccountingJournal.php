@@ -4,12 +4,21 @@ declare(strict_types=1);
 
 namespace Scottlaurent\Accounting\ModelTraits;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Scottlaurent\Accounting\Exceptions\JournalAlreadyExists;
 use Scottlaurent\Accounting\Models\Journal;
+use Scottlaurent\Accounting\Models\Ledger;
 
 trait AccountingJournal
 {
+
+    public function journals(): MorphMany
+    {
+        return $this->morphMany(\App\Models\AccountingJournal::class, 'morphed');
+    }
+
+
     public function journal(): MorphOne
     {
         return $this->morphOne(Journal::class, 'morphed');
@@ -34,4 +43,10 @@ trait AccountingJournal
         }
         throw new JournalAlreadyExists;
     }
+
+    public function getLedgerByType($type)
+    {
+        return Ledger::where(['type' => $type])->firstOrFail();
+    }
+
 }
